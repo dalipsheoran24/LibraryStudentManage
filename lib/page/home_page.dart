@@ -27,22 +27,20 @@ class _HomePageState extends State<HomePage> {
   int listTime;
 
 
-
   Future getImage() async {
     // ignore: invalid_use_of_visible_for_testing_member
     PickedFile images =
-        // ignore: invalid_use_of_visible_for_testing_member
-        await ImagePicker.platform.pickImage(source: ImageSource.camera);
-      imagePath = images.path;
-
+    // ignore: invalid_use_of_visible_for_testing_member
+    await ImagePicker.platform.pickImage(source: ImageSource.camera);
+    imagePath = images.path;
   }
+
   Future getIdImage() async {
     // ignore: invalid_use_of_visible_for_testing_member
     PickedFile idImage =
     // ignore: invalid_use_of_visible_for_testing_member
     await ImagePicker.platform.pickImage(source: ImageSource.camera);
     idImagePath = idImage.path;
-
   }
 
   @override
@@ -96,54 +94,51 @@ class _HomePageState extends State<HomePage> {
                 ),
 
 
-
-
                 SizedBox(
                   height: 30,
                 ),
                 Row(
                   children: [
                     ElevatedButton(
-                      child: Text('Submit Data'),
-                      onPressed: () async {
-                        String name = nameController.text;
-                        String address = addressController.text;
-                        String mobile = mobController.text;
-                        String fees = feesController.text;
-                        String date = dateController.text;
+                        child: Text('Submit Data'),
+                        onPressed: () async {
+                          String name = nameController.text;
+                          String address = addressController.text;
+                          String mobile = mobController.text;
+                          String fees = feesController.text;
+                          String date = dateController.text;
 
-                       // if (imagePath != null && idImagePath !=null)
+                          //
 
-                         {
-                          StudentInformation stdInfo = StudentInformation(
-                              name: name,
-                              address: address,
-                              mobile: mobile,
-                              fees: fees,
-                              date: date,
-                              imagePath: imagePath,
-                              idImagePath: idImagePath,
+                              {
+                            if (imagePath != null && idImagePath != null) {
+                              StudentInformation stdInfo = StudentInformation(
+                                name: name,
+                                address: address,
+                                mobile: mobile,
+                                fees: fees,
+                                date: date,
+                                imagePath: imagePath,
+                                idImagePath: idImagePath,
+                              );
 
-
-
-                          );
-
-                          await dbHelper.insertData(stdInfo);
-                          nameController.text = "";
-                          addressController.text = "";
-                          mobController.text = "";
-                          feesController.text = "";
-                          dateController.text = "";
-                          print(value);
-                          Navigator.pop(context);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => StdResult()));
-                        } //else {
+                              await dbHelper.insertData(stdInfo);
+                              nameController.text = "";
+                              addressController.text = "";
+                              mobController.text = "";
+                              feesController.text = "";
+                              dateController.text = "";
+                              print(value);
+                              Navigator.pop(context);
+                            }
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => StdResult()));
+                          } //else {
                           //Image not selected
                         }
-                     // },
+                      // },
                     ),
                     SizedBox(
                       width: 10,
